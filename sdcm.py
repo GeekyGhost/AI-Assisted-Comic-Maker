@@ -7,18 +7,23 @@ root.title("Comic Book Creator")
 root.geometry("800x600")
 
 def open_image():
+    pass
     # Code to open an image and display it on the canvas
 
 def save_image():
+    pass
     # Code to save the current canvas as an image
 
 def generate_image():
+    pass
     # Code to generate an image using the AI art generator
 
 def inpaint_image():
+    pass
     # Code to inpaint the selected panel
 
 def outpaint_image():
+    pass
     # Code to outpaint the selected panels
 
 class ResizableShape:
@@ -30,6 +35,7 @@ class ResizableShape:
         self.width = width
         self.height = height
         self.color = color
+        self.fill = color
         self.shape_id = None
         self.selected = False
 
@@ -37,10 +43,9 @@ class ResizableShape:
 
     def create_shape(self):
         if self.shape_type == "rectangle":
-            self.shape_id = self.canvas.create_rectangle(self.x, self.y, self.x + self.width, self.y + self.height, outline=self.color)
+            self.shape_id = self.canvas.create_rectangle(self.x, self.y, self.x + self.width, self.y + self.height, outline=self.color, fill=self.fill)
         elif self.shape_type == "oval":
-            self.shape_id = self.canvas.create_oval(self.x, self.y, self.x + self.width, self.y + self.height, outline=self.color)
-        # Add more shapes here as needed
+            self.shape_id = self.canvas.create_oval(self.x, self.y, self.x + self.width, self.y + self.height, outline=self.color, fill=self.fill)
 
         self.canvas.tag_bind(self.shape_id, "<ButtonPress-1>", self.on_shape_press)
         self.canvas.tag_bind(self.shape_id, "<B1-Motion>", self.on_shape_drag)
@@ -49,6 +54,7 @@ class ResizableShape:
     def on_shape_press(self, event):
         self.selected = True
         self.canvas.itemconfig(self.shape_id, outline="red")
+        self.move_forward()
 
     def on_shape_drag(self, event):
         if self.selected:
@@ -58,6 +64,13 @@ class ResizableShape:
     def on_shape_release(self, event):
         self.selected = False
         self.canvas.itemconfig(self.shape_id, outline=self.color)
+
+    def move_forward(self):
+        self.canvas.tag_raise(self.shape_id)
+
+    def move_backward(self):
+        self.canvas.tag_lower(self.shape_id)
+
 
 def create_primitive():
     shape_type = "rectangle"  # You can create a dropdown menu to let the user choose the shape type
@@ -97,4 +110,5 @@ primitive_button = tk.Button(tools_frame, text="Create Primitive", command=creat
 primitive_button.pack(fill="both", padx=5, pady=5)
 
 root.mainloop()
+
 

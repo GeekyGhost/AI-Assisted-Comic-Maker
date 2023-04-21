@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import colorchooser
 from tkinter import filedialog, messagebox
 
 root = tk.Tk()

@@ -3,7 +3,7 @@ from tkinter import colorchooser
 from tkinter import filedialog, messagebox
 
 root = tk.Tk()
-root.title("Comic Book Creator")
+root.title("AI Comic Book Maker")
 root.geometry("800x600")
 
 def open_image():
@@ -91,7 +91,7 @@ file_menu.add_command(label="Save", command=save_image)
 file_menu.add_separator()
 file_menu.add_command(label="Exit", command=root.quit)
 
-canvas = tk.Canvas(root, width=600, height=400, bg="white")
+canvas = tk.Canvas(root, width=512, height=768, bg="black")
 canvas.pack(side="left", padx=10, pady=10)
 
 tools_frame = tk.Frame(root)
@@ -108,6 +108,18 @@ outpaint_button.pack(fill="both", padx=5, pady=5)
 
 primitive_button = tk.Button(tools_frame, text="Create Primitive", command=create_primitive)
 primitive_button.pack(fill="both", padx=5, pady=5)
+
+# Positive prompt entry
+positive_prompt_label = tk.Label(tools_frame, text="Positive Prompt:")
+positive_prompt_label.pack(anchor="w", padx=5, pady=5)
+positive_prompt_entry = tk.Entry(tools_frame, width=30)
+positive_prompt_entry.pack(anchor="w", padx=5, pady=5)
+
+# Negative prompt entry
+negative_prompt_label = tk.Label(tools_frame, text="Negative Prompt:")
+negative_prompt_label.pack(anchor="w", padx=5, pady=5)
+negative_prompt_entry = tk.Entry(tools_frame, width=30)
+negative_prompt_entry.pack(anchor="w", padx=5, pady=5)
 
 root.mainloop()
 
